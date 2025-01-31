@@ -51,7 +51,7 @@ get_current_user() {
     
     if [[ -f "${connectionProfilesFile}" ]]; then
         logging "INFO" "Editing ConnectionProfiles file: ${connectionProfilesFile}"
-        echo '{"Version":"1","LastSelectedProfileIndex":0,"ConnectionProfiles":[{"ProfileName":"${connectionProfileName}","OvpnConfigFilePath":"/Users/'"${localAccount}"'/.config/AWSVPNClient/OpenVpnConfigs/'"${connectionProfileName}"'","CvpnEndpointId":"${connectionProfileCvpn}","CvpnEndpointRegion":'"${connectionProfileRegion}"',"CompatibilityVersion":'"${compatibilityVersion}"',"FederatedAuthType":'${federatedAuthType}']}' > "${connectionProfilesFile}" || { logging "ERROR" "Failed to edit ConnectionProfiles file"; exit 1; }
+        echo '{"Version":"1","LastSelectedProfileIndex":0,"ConnectionProfiles":[{"ProfileName":"${connectionProfileName}","OvpnConfigFilePath":"/Users/'"${localAccount}"'/.config/AWSVPNClient/OpenVpnConfigs/'"${connectionProfileName}"'","CvpnEndpointId":'"${connectionProfileCvpn}"',"CvpnEndpointRegion":'"${connectionProfileRegion}"',"CompatibilityVersion":'"${compatibilityVersion}"',"FederatedAuthType":'${federatedAuthType}']}' > "${connectionProfilesFile}" || { logging "ERROR" "Failed to edit ConnectionProfiles file"; exit 1; }
         logging "INFO" "ConnectionProfiles file edited successfully"
 
         # Fix permissions for the edited file
