@@ -3,7 +3,7 @@
 # Variables
 localAccount=$(/usr/bin/stat -f%Su /dev/console)
 aws_vpn_app="/Applications/AWS VPN Client/AWS VPN Client.app"
-profile_name="Fluency-VPN"
+profile_name="Name of Profile Here"
 profile_path="/Users/${localAccount}/.config/AWSVPNClient/OpenVpnConfigs/${profile_name}"
 
 # Audit Script
