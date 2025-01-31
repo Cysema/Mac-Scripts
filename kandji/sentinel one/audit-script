@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Array of required profiles
+REQUIRED_PROFILES=(
+    "S1 - Full Disk Access"
+    "S1 - Network Filtering"
+    "S1 - Network Monitoring"
+    "S1 - Notifications"
+    "S1 - Service Management"
+)
+
+# Function to check if a profile is installed
+check_profile_installed() {
+    local profile_name=$1
+    profiles_list=$(profiles -C -v | awk -F: '/attribute: name/{print $NF}')
+    
+    if echo "$profiles_list" | grep -F -q "$profile_name"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Check each required profile
+for profile in "${REQUIRED_PROFILES[@]}"; do
+    if ! check_profile_installed "$profile"; then
+        echo "Error: $profile is not installed."
+        exit 0
+    fi
+done
+
+echo "All required profiles are installed. Proceeding to check for SentinelOne..."
+
+# Check if SentinelOne is installed
+if [ -d "/Library/Sentinel/sentinel-agent.bundle/Contents/MacOS/SentinelAgent.app" ]; then
+    echo "SentinelOne is installed."
+    exit 0
+else
+    echo "SentinelOne is not installed. Starting install process."
+    exit 1
+fi
