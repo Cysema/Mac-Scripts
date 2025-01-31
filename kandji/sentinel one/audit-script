@@ -7,6 +7,7 @@ REQUIRED_PROFILES=(
     "S1 - Network Monitoring"
     "S1 - Notifications"
     "S1 - Service Management"
+    "S1 - Token"
 )
 
 # Function to check if a profile is installed
