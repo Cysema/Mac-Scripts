@@ -1,7 +1,5 @@
 Full README Coming Soon.
 
-Profile Guide:
-https://mcphearson.substack.com/p/sentinelone-deployment-part-2
+[Profile Installation Guide](https://notyouritguru.substack.com/p/sentinelone-profile-deployment)
 
-Custom App Guide:
-https://mcphearson.substack.com/p/deploying-sentinelone-for-mac-via
+[SentinelOne Custom App Installation Guide](https://notyouritguru.substack.com/p/deploying-sentinelone-with-kandji) (Perform Profiles First)
