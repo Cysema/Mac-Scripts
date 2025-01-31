@@ -13,7 +13,7 @@ logging() {
 open_and_close_aws_vpn_client() {
     logging "INFO" "Opening AWS VPN Client application..."
     open -j -a "/Applications/AWS VPN Client/AWS VPN Client.app"
-    sleep 5 # Wait for the application to open
+    sleep 3 # Wait for the application to open
     logging "INFO" "Closing AWS VPN Client application..."
     osascript -e 'quit app "AWS VPN Client.app"'
 }

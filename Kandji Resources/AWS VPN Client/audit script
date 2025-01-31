@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Variables
+localAccount=$(/usr/bin/stat -f%Su /dev/console)
+aws_vpn_app="/Applications/AWS VPN Client/AWS VPN Client.app"
+profile_name="NAME OF PROFILE"
+profile_path="/Users/${localAccount}/.config/AWSVPNClient/OpenVpnConfigs/${profile_name}"
+
+# Audit Script
+if [ -d "${aws_vpn_app}" ]; then
+    # App is installed, check for profile.
+    if [ -f "${profile_path}" ]; then
+        echo "AWS VPN Client and profile '${profile_name}' are both installed."
+        # All Good!
+        exit 0
+    else
+        echo "AWS VPN Client is installed, but profile '${profile_name}' is missing."
+        # Profile is not installed, proceed to install.
+        exit 1
+    fi
+else
+    # App is missing.
+    echo "AWS VPN Client is missing. Waiting for install..."
+    exit 0
+fi
