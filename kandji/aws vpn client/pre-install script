@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Function to log messages
+logging() {
+    local log_level=$1
+    local message=$2
+    local timestamp
+    timestamp=$(date +"%Y-%m-%d %T")
+    echo "[${timestamp}] [${log_level}] ${message}" >> "/var/tmp/AWS VPN LOGS"
+}
+
+# Prepare AWS VPN Client for Profile Install
+open_and_close_aws_vpn_client() {
+    logging "INFO" "Opening AWS VPN Client application..."
+    open -j -a "/Applications/AWS VPN Client/AWS VPN Client.app"
+    sleep 5 # Wait for the application to open
+    logging "INFO" "Closing AWS VPN Client application..."
+    osascript -e 'quit app "AWS VPN Client.app"'
+}
+
+# Prinstall Script
+open_and_close_aws_vpn_client
+logging "INFO" "Script completed successfully."
