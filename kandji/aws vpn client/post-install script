@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Function to log messages
+logging() {
+    local log_level=$1
+    local message=$2
+    local timestamp=$(date +"%Y-%m-%d %T")
+    echo "[${timestamp}] [${log_level}] ${message}" >> /var/tmp/AWS\ VPN\ LOGS
+}
+
+# Find the current user or most common user
+get_current_user() {
+    # Get the current logged in user
+    local localAccount=$(/usr/bin/stat -f%Su /dev/console)
+    logging "INFO" "Current user is: ${localAccount}"
+
+    # If no user is logged in, find the most common user.
+    if [[ "${localAccount}" == "root" ]]; then
+        logging "WARNING" "There is no user logged in..."
+        logging "INFO" "Attempting to determine the most common user..."
+
+        # Find the most common user who uses the Mac
+        localAccount=$(/usr/sbin/ac -p | /usr/bin/sort -nk 2 | /usr/bin/grep -E -v "total|admin|root|mbsetup|adobe" | /usr/bin/tail -1 | /usr/bin/xargs | /usr/bin/cut -d " " -f1)
+
+        if [[ -z "${localAccount}" ]]; then
+            logging "ERROR" "Unable to determine current or most common user. Exiting..."
+            exit 1
+        fi
+
+        logging "INFO" "Most common user is: ${localAccount}"
+    fi
+
+    # Move contents from /var/tmp/AwsVpnProfile to ~/.config/AWSVPNClient/OpenVpnConfigs/
+    local awsVpnProfileDir="/var/tmp/AwsVpnProfile"
+    local awsVpnProfileDestDir="/Users/${localAccount}/.config/AWSVPNClient/OpenVpnConfigs/"
+    if [[ -d "${awsVpnProfileDir}" ]]; then
+        logging "INFO" "Moving files from ${awsVpnProfileDir} to ${awsVpnProfileDestDir}"
+        mv -f "${awsVpnProfileDir}"/* "${awsVpnProfileDestDir}" || { logging "ERROR" "Failed to move files from ${awsVpnProfileDir} to ${awsVpnProfileDestDir}"; exit 1; }
+        logging "INFO" "Files moved successfully"
+    else
+        logging "WARNING" "No 'AwsVpnProfile' folder found in /var/tmp"
+    fi
+
+    # Edit ConnectionProfiles file
+    local connectionProfilesFile="/Users/${localAccount}/.config/AWSVPNClient/ConnectionProfiles"
+    local connectionProfileName="PUT YOUR PROFILE NAME HERE"
+    local connectionProfileCvpn="CVPN ENDPOINT HERE"
+    local connectionProfileRegion="PUT YOUR REGION HERE" # us-east-1 as an example.
+    local compatibilityVersion="2"
+    local federatedAuthType="1"
+    
+    if [[ -f "${connectionProfilesFile}" ]]; then
+        logging "INFO" "Editing ConnectionProfiles file: ${connectionProfilesFile}"
+        echo '{"Version":"1","LastSelectedProfileIndex":0,"ConnectionProfiles":[{"ProfileName":"${connectionProfileName}","OvpnConfigFilePath":"/Users/'"${localAccount}"'/.config/AWSVPNClient/OpenVpnConfigs/'"${connectionProfileName}"'","CvpnEndpointId":"${connectionProfileCvpn}","CvpnEndpointRegion":'"${connectionProfileRegion}"',"CompatibilityVersion":'"${compatibilityVersion}"',"FederatedAuthType":'${federatedAuthType}']}' > "${connectionProfilesFile}" || { logging "ERROR" "Failed to edit ConnectionProfiles file"; exit 1; }
+        logging "INFO" "ConnectionProfiles file edited successfully"
+
+        # Fix permissions for the edited file
+        chown "${localAccount}" "${connectionProfilesFile}" || { logging "ERROR" "Failed to fix permissions for ConnectionProfiles file"; exit 1; }
+        logging "INFO" "Permissions fixed for ConnectionProfiles file"
+    else
+        logging "ERROR" "ConnectionProfiles file not found: ${connectionProfilesFile}"
+        exit 1
+    fi
+
+    # Delete the folder /var/tmp/AwsVpnProfile
+    logging "INFO" "Deleting folder /var/tmp/AwsVpnProfile..."
+    rm -rf "${awsVpnProfileDir}"
+    logging "INFO" "Folder /var/tmp/AwsVpnProfile deleted"
+}
+
+# Call the function to start the script
+get_current_user
