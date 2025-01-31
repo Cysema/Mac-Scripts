@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Define the registration token
+SITE_TOKEN="YOUR_SITE_TOKEN_HERE"
+
+# Create the registration token file
+echo "$SITE_TOKEN" > /tmp/sentinel_install/com.sentinelone.registration-token
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to create registration token file."
+    exit 1
+fi
+
+# Install the SentinelOne package
+/usr/sbin/installer -pkg /tmp/sentinel_install/sentinel-installer.pkg -target /
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to install the SentinelOne package."
+    exit 1
+fi
+
+# Remove the temporary installation directory
+rm -rf /tmp/sentinel_install
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to remove temporary installation directory."
+    exit 1
+fi
+
+echo "Script completed successfully."
