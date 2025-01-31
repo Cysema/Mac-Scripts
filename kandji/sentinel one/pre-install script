@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Create the directory /tmp/sentinel_install/
+echo "Creating directory /tmp/sentinel_install/..."
+if mkdir -p /tmp/sentinel_install/; then
+    echo "Directory /tmp/sentinel_install/ created successfully."
+else
+    echo "Error: Failed to create directory /tmp/sentinel_install/."
+    exit 1
+fi
+
+echo "Script completed successfully."
