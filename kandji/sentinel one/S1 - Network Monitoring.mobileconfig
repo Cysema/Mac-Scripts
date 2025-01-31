@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>AllowUserOverrides</key>
+			<true/>
+			<key>AllowedSystemExtensions</key>
+			<dict>
+				<key>4AYE5J54KN</key>
+				<array>
+					<string>com.sentinelone.network-monitoring</string>
+				</array>
+			</dict>
+			<key>PayloadDescription</key>
+			<string></string>
+			<key>PayloadDisplayName</key>
+			<string>System Extensions</string>
+			<key>PayloadIdentifier</key>
+			<string>1BDD5153-6C81-4E0F-B409-1C321FF5E251</string>
+			<key>PayloadOrganization</key>
+			<string>Gete.Net Consulting</string>
+			<key>PayloadType</key>
+			<string>com.apple.system-extension-policy</string>
+			<key>PayloadUUID</key>
+			<string>1BDD5153-6C81-4E0F-B409-1C321FF5E251</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Enables automatic loading of SentinelOne System Extension.</string>
+	<key>PayloadDisplayName</key>
+	<string>S1 - Network Monitoring</string>
+	<key>PayloadIdentifier</key>
+	<string>com.kandji.profile.custom.91444b37-8d15-46e9-a689-a52d526671c9</string>
+	<key>PayloadOrganization</key>
+	<string>Sentinel Labs, Inc.</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>e392826e-b758-5e39-959a-ed4f813ab1d9</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

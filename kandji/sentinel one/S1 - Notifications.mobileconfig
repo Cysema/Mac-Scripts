@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>NotificationSettings</key>
+			<array>
+				<dict>
+					<key>AlertType</key>
+					<integer>1</integer>
+					<key>BadgesEnabled</key>
+					<true/>
+					<key>BundleIdentifier</key>
+					<string>com.sentinelone.SentinelAgent</string>
+					<key>CriticalAlertEnabled</key>
+					<true/>
+					<key>GroupingType</key>
+					<integer>0</integer>
+					<key>NotificationsEnabled</key>
+					<true/>
+					<key>ShowInCarPlay</key>
+					<false/>
+					<key>ShowInLockScreen</key>
+					<true/>
+					<key>ShowInNotificationCenter</key>
+					<true/>
+					<key>SoundsEnabled</key>
+					<true/>
+				</dict>
+			</array>
+			<key>PayloadDisplayName</key>
+			<string>Notifications</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.notificationsettings.406D4B22-BE3A-4361-8C7B-B8ECE25BC8D6</string>
+			<key>PayloadType</key>
+			<string>com.apple.notificationsettings</string>
+			<key>PayloadUUID</key>
+			<string>2EA2BDB3-83CE-40DB-B3DF-33BD0094F0DF</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Forces notifications for SentinelOne Agent</string>
+	<key>PayloadDisplayName</key>
+	<string>S1 - Notifications</string>
+	<key>PayloadEnabled</key>
+	<true/>
+	<key>PayloadIdentifier</key>
+	<string>com.kandji.profile.custom.26783496-95e2-48d9-949b-d71a37181592</string>
+	<key>PayloadOrganization</key>
+	<string>Sentinel Labs, Inc.</string>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>cbcf5c85-c136-5cbd-b69a-2ce35ffd00d3</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+	<key>TargetDeviceType</key>
+	<integer>5</integer>
+</dict>
+</plist>
